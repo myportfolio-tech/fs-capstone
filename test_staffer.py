@@ -134,6 +134,23 @@ class StafferTest(unittest.TestCase):
         self.assertEqual(res.status_code, 200)
 
 
+#POST Projecte with valid Token    
+    def test_create_project(self):
+
+        res = self.client().post('/project/create', headers=[
+                ('Content-Type', 'application/json'),
+                ('Authorization', f'Bearer {self.token1}')
+            ], data = json.dumps({
+                "tag": random.randint(1, 32767),
+                "name": 'Test Project',
+                "advisor_id": random.randint(1, 50),
+                "manager_id": random.randint(1, 50),
+                "director_id": random.randint(1, 50)
+                }))
+
+        self.assertEqual(res.status_code, 200)
+
+
 
 
 if __name__ == "__main__":

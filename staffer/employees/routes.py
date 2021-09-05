@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify, abort, request
+from flask import Blueprint, abort, jsonify, request
 from staffer.models import Employee
 from staffer.utils.utils import json_employees_results, json_employee
 from staffer.utils.auth import requires_auth
