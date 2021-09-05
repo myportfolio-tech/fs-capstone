@@ -9,11 +9,6 @@ projects = Blueprint('projects', __name__)
 def get_all_projects():
     
     all_projects = Project.query.all()
-    print(all_projects)
     projects = process_project_results(all_projects)
     
-    return jsonify({
-        'success': True,
-        'projects': projects,
-        'total': len(projects)
-        })
+    return projects

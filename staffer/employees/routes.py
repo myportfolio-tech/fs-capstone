@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify
+from flask import Blueprint, jsonify, abort
 from staffer.models import Employee
 from staffer.utils.utils import process_employee_results
 
@@ -9,11 +9,16 @@ employees = Blueprint('employee', __name__)
 def get_all_employees():
     
     all_employees = Employee.query.all()
-    print(all_employees)
     employees = process_employee_results(all_employees)
     
-    return jsonify({
-        'success': True,
-        'employees': employees,
-        'total': len(employees)
-    })
+    return employees
+
+@employees.route("/employee/<int:emp_id>", methods=['GET', 'POST'])
+def employee(emp_id):
+    
+    emp = Employee.query.get_or_404(emp_id)
+    if emp is None:
+        abort(404)
+    employee = process_employee_results(emp)
+    
+    return employee
