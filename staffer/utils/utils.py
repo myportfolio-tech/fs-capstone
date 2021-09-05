@@ -1,7 +1,7 @@
 from flask import jsonify
 
 # takes a sqlalchemy query results and jsonifies it
-def process_employees_results(sql_employees):
+def json_employees_results(sql_employees):
     employees =[]
     for emp in sql_employees:
         emp_dict = {}
@@ -18,7 +18,8 @@ def process_employees_results(sql_employees):
         'total': len(employees)
     })
 
-def get_employee(sql_employee):
+
+def json_employee(sql_employee):
         
         return jsonify({
         'success': True,
@@ -28,8 +29,9 @@ def get_employee(sql_employee):
         'department': sql_employee.department
     })
 
+
 # takes a sqlalchemy query results and jsonifies it
-def process_project_results(sql_projects):
+def json_projects_results(sql_projects):
     projects =[]
     for proj in sql_projects:
         proj_dict = {}
@@ -47,7 +49,7 @@ def process_project_results(sql_projects):
     })
 
 
-def get_project(sql_project):
+def json_project(sql_project):
         
         return jsonify({
         'success': True,

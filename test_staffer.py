@@ -32,7 +32,8 @@ class StafferTest(unittest.TestCase):
             # create all tables
             self.db.create_all()
         
-        self.token1 = 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IkstNjZMQlNsNkRvWTV4NjBmdllNOCJ9.eyJpc3MiOiJodHRwczovL2RvYWgudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDYwYWQwZDg3Y2E1MDRkMDA3MGM4YWE3NCIsImF1ZCI6InN0YWZmZXIiLCJpYXQiOjE2MzA4NjQ3ODksImV4cCI6MTYzMDg3MTk4OSwiYXpwIjoiM3dFck5wdERDcFRrTTRsc3drSlU4S2llbUNmZE1la0YiLCJzY29wZSI6IiIsInBlcm1pc3Npb25zIjpbImRlbGV0ZTplbXBsb3llZSIsImRlbGV0ZTpwcm9qZWN0IiwiZ2V0OmVtcGxveWVlIiwiZ2V0OnByb2plY3QiLCJwYXRjaDplbXBsb3llZSIsInBhdGNoOnByb2plY3QiLCJwb3N0OmVtcGxveWVlIiwicG9zdDpwcm9qZWN0Il19.pvcAswWpPgFPdjapXlo0FP1NBuL5E_4NPEi1u-PF6oWI32FVRHQmUCXenieM5V91kUoLoAZWlFxpzzb6ZVlGoc8yZpWETTM_Zzsc_A3hpVSs9vZw10iBl-KnxYVAUJdssQOtNKEfxEFNZvooKK66PMTlEMGgI1LDbOynMyYFhnh7pKYV8rMJ4Na7x-opmMJxixnvsWKsPmslhfjGDoabzXX9_40P3ojr6yuSIxLAhluWj6UQRyf5QA_Wu4hPjmx5tXI3PFTtgaXLFT7UwYermZZh-O-KAvuC_QGJ2NNsxEVDPhstTnyZCjdYJBTAxB_nHO44Q__UsryTp3Fnov_8zg'
+        self.token1 = 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IkstNjZMQlNsNkRvWTV4NjBmdllNOCJ9.eyJpc3MiOiJodHRwczovL2RvYWgudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDYwYWQwZDg3Y2E1MDRkMDA3MGM4YWE3NCIsImF1ZCI6InN0YWZmZXIiLCJpYXQiOjE2MzA4NzEwNzYsImV4cCI6MTYzMDg3ODI3NiwiYXpwIjoiM3dFck5wdERDcFRrTTRsc3drSlU4S2llbUNmZE1la0YiLCJzY29wZSI6IiIsInBlcm1pc3Npb25zIjpbImRlbGV0ZTplbXBsb3llZSIsImRlbGV0ZTpwcm9qZWN0IiwiZ2V0OmVtcGxveWVlIiwiZ2V0OnByb2plY3QiLCJwYXRjaDplbXBsb3llZSIsInBhdGNoOnByb2plY3QiLCJwb3N0OmVtcGxveWVlIiwicG9zdDpwcm9qZWN0Il19.BsuY_cFci7IpVTZrIJS1GZr9AUYDCXYngidJ2TKIYpxhHKsYIfess1iTqHMwqIabEkmtCoVfwp71kTfZVD7Ars53jzeeiZ4KbvhKtoOS6C_aHJZSVdBc1REjdHFQ-r8F90RWzq0hW2macMexwaPTRqdygkaDgpmhXj9-u9YeU54kswaAcRjgnrfW6WiGspXu3S_oetYzAHVJDuuFd-ntMEVUsG5r4QjGMO8wRgekbfHQ0TdZrI7d-EXYMjhf4G7zohIKaz7ZdHA2eliUJWi7jENxMK5PbaDamedI9PmIFN5CeBkFjoe0diVQsVDRyN5RoFMIZj7_idRXxUEBoczr9g'
+        self.invalid_token = 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IkstNjZMQlNsNkRvWTV4NjBmdllNOCJ9.eyJpc3MiOiJodHRwczovL2RvYWgudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDYwYWQwZDg3Y2E1MDRkMDA3MGM4YWE3NCIsImF1ZCI6InN0YWZmZXIiLCJpYXQiOjE2MzA4NzEwNzYsImV4cCI6MTYzMDg3ODI3NiwiYXpwIjoiM3dFck5wdERDcFRrTTRsc3drSlU4S2llbUNmZE1la0YiLCJzY29wZSI6IiIsInBlcm1pc3Npb25zIjpbImRlbGV0ZTplbXBsb3llZSIsImRlbGV0ZTpwcm9qZWN0IiwiZ2V0OmVtcGxveWVlIiwiZ2V0OnByb2plY3QiLCJwYXRjaDplbXBsb3llZSIsInBhdGNoOnByb2plY3QiLCJwb3N0OmVtcGxveWVlIiwicG9zdDpwcm9qZWN0Il19.BsuY_cFci7IpVTZrIJS1GZr9AUYDCXYngidJ2TKIYpxhHKsYIfess1iTqHMwqIabEkmtCoVfwp71kTfZVD7Ars53jzeeiZ4KbvhKtoOS6C_aHJZSVdBc1REjdHFQ-r8F90RWzq0hW2macMexwaPTRqdygkaDgpmhXj9-u9YeU54kswaAcRjgnrfW6WiGspXu3S_oetYzAHVJDuuFd-ntMEVUsG5r4QjGMO8wRgekbfHQ0TdZrI7d-EXYMjhf4G7zohIKaz7ZdHA2eliUJWi7jENxMK5PbaDamedI9PmIFN5CeBkFjoe0diVQsVDRyN5RoFMIZj7_idRXxUEBoc1111'
 
     def tearDown(self):
         """Executed after reach test"""
@@ -99,6 +100,18 @@ class StafferTest(unittest.TestCase):
         self.assertEqual(res.status_code, 200)
         self.assertTrue(data.get('success'), True)
         self.assertGreaterEqual(data.get('id'), 1)
+
+
+#Get Employee with Invalid Token    
+    def test_get_employee(self):
+
+        res = self.client().get('/employee/1', headers=[
+                ('Content-Type', 'application/json'),
+                ('Authorization', f'Bearer {self.invalid_token}')
+            ])
+
+        self.assertEqual(res.status_code, 400)
+
 
 
 
