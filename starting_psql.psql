@@ -1,0 +1,132 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 11.3
+-- Dumped by pg_dump version 11.3
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+SET default_tablespace = '';
+SET default_with_oids = false;
+
+
+CREATE USER stafferadmin WITH PASSWORD 'administrator' CREATEDB;
+
+DROP DATABASE IF EXISTS "staffer_api";
+CREATE DATABASE "staffer_api";
+\c "staffer_api";
+
+
+GRANT ALL PRIVILEGES ON DATABASE "staffer_api" TO stafferadmin;
+
+
+
+-- EMPLOYEE ---
+CREATE TABLE "employees" (
+    "id" SERIAL PRIMARY KEY,
+    "username" VARCHAR(20) UNIQUE NOT NULL,
+    "email" VARCHAR(20) UNIQUE NOT NULL,
+    "department" VARCHAR(20) NOT NULL,
+    -- the username must be 3 characters or longer --
+    CONSTRAINT "username_length" CHECK (
+        LENGTH(TRIM("username")) >= 3)
+);
+
+-- PROJECT ---
+CREATE TABLE "projects" (
+    "id" SERIAL PRIMARY KEY,
+    "tag" SMALLINT,
+    "name" VARCHAR(120) NOT NULL,
+    "advisor_id" INTEGER,
+    "manager_id" INTEGER,
+    "director_id" INTEGER,
+    FOREIGN KEY  ("advisor_id") REFERENCES "employees" ("id") ON DELETE CASCADE,
+    FOREIGN KEY  ("manager_id") REFERENCES "employees" ("id") ON DELETE CASCADE,
+    FOREIGN KEY  ("director_id") REFERENCES "employees" ("id") ON DELETE CASCADE,
+    -- the project_name must be 3 or more characters long --
+    CONSTRAINT "project_name_length" CHECK (
+        LENGTH(TRIM("name")) >= 3)
+);
+
+
+
+INSERT INTO "employees" ("username", "email", "department") VALUES 
+('numero uno', 'email1@emails.com', 'accounting'),
+('numero dos', 'email2@emails.com', 'hr'),
+('numero tres', 'email3@emails.com', 'accounting'),
+('numero quatro', 'email4@emails.com', 'hr'),
+('numero cinco', 'email5@emails.com', 'pornography'),
+('numero seis', 'email6@emails.com', 'accounting'),
+('numero seven', 'email7@emails.com', 'hr'),
+('numero eight', 'email8@emails.com', 'pornography'),
+('numero nueve', 'email9@emails.com', 'accounting'),
+('numero dies', 'email10@emails.com', 'hr'),
+('numero once', 'email11@emails.com', 'accounting'),
+('numero doce', 'email12@emails.com', 'hr'),
+('numero trece', 'email13@emails.com', 'pornography'),
+('numero catorce', 'email14@emails.com', 'accounting'),
+('numero quince', 'email15@emails.com', 'hr'),
+('numero diesiseis', 'email16@emails.com', 'pornography'),
+('numero uno 1', 'email17@emails.com', 'accounting'),
+('numero dos 1', 'email18@emails.com', 'hr'),
+('numero tres 1', 'email19@emails.com', 'accounting'),
+('numero quatro 1', 'email20@emails.com', 'hr'),
+('numero cinco 1', 'email21@emails.com', 'pornography'),
+('numero seis 1', 'email22@emails.com', 'accounting'),
+('numero seven 1', 'email23@emails.com', 'hr'),
+('numero eight 1', 'email24@emails.com', 'pornography'),
+('numero nueve 1', 'email25@emails.com', 'accounting'),
+('numero dies 1', 'email26@emails.com', 'hr'),
+('numero once 1', 'email27@emails.com', 'accounting'),
+('numero doce 1', 'email28@emails.com', 'hr'),
+('numero trece 1', 'email29@emails.com', 'pornography'),
+('numero catorce 1', 'email30@emails.com', 'accounting'),
+('numero quince 1', 'email31@emails.com', 'hr'),
+('numero diesiseis1', 'email32@emails.com', 'pornography'),
+('numero uno 2', 'email1@emails33.com', 'accounting'),
+('numero dos 2', 'email2@emails34.com', 'hr'),
+('numero tres 2', 'email3@emails35.com', 'accounting'),
+('numero quatro 2', 'email4@emails1.com', 'hr'),
+('numero cinco 2', 'email5@emails12.com', 'pornography'),
+('numero seis 2', 'email6@emails12.com', 'accounting'),
+('numero seven 2', 'email7@emails12.com', 'hr'),
+('numero eight 2', 'email8@emails12.com', 'pornography'),
+('numero nueve 2', 'email9@emails12.com', 'accounting'),
+('numero dies 2', 'email10@emails12.com', 'hr'),
+('numero once 2', 'email11@emails12.com', 'accounting'),
+('numero doce 2', 'email12@emails12.com', 'hr'),
+('numero trece 2', 'email13@emails12.com', 'pornography'),
+('numero catorce 2', 'email14@emails12.com', 'accounting'),
+('numero quince 2', 'email15@emails12.com', 'hr'),
+('numero diesiseis 2', 'email16@emails12.com', 'pornography'),
+('numero quince 3', 'email17@emails12.com', 'hr'),
+('numero diesiseis 3', 'email18@emails12.com', 'pornography');
+
+
+INSERT INTO "projects" ("tag", "name", "advisor_id", "manager_id", "director_id") VALUES 
+(1244, 'Project One', 1, 13, 5),
+(3789, 'Project Two', 2, 3, 4),
+(7856, 'Project Three', 5, 4, 6),
+(9380, 'Project Four', 7, 5, 6 ),
+(0493, 'Project Five', 4, 7, 6),
+(4848, 'Project Six', 1, 4, 3),
+(3456, 'Project Seven', 1, 8, 3),
+(4890, 'Project Eight', 1, 4, 8),
+(7678, 'Project Nine', 1, 15, 5),
+(6876, 'Project Ten', 2, 3, 4),
+(5655, 'Project Eleven', 5, 11, 6),
+(4654, 'Project Twelve', 7, 5, 6 ),
+(4689, 'Project Thirteen', 12, 7, 6),
+(2236, 'Project Fourteen', 1, 4, 3),
+(5654, 'Project Fifteen', 1, 8, 3),
+(5656, 'Project Sxteen', 1, 14, 8);
+
