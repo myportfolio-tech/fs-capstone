@@ -1,13 +1,14 @@
 from flask import jsonify
 
 # takes a sqlalchemy query results and jsonifies it
-def process_employee_results(sql_employees):
+def process_employees_results(sql_employees):
     employees =[]
     for emp in sql_employees:
         emp_dict = {}
         emp_dict['id'] = emp.id
         emp_dict['username'] = emp.username
         emp_dict['department'] = emp.department
+        emp_dict['email'] = emp.email
 
         employees.append(emp_dict)
 
@@ -17,6 +18,15 @@ def process_employee_results(sql_employees):
         'total': len(employees)
     })
 
+def get_employee(sql_employee):
+        
+        return jsonify({
+        'success': True,
+        'id': sql_employee.id,
+        'username': sql_employee.username,
+        'email': sql_employee.email,
+        'department': sql_employee.department
+    })
 
 # takes a sqlalchemy query results and jsonifies it
 def process_project_results(sql_projects):
@@ -36,3 +46,15 @@ def process_project_results(sql_projects):
         'total': len(projects)
     })
 
+
+def get_project(sql_project):
+        
+        return jsonify({
+        'success': True,
+        'id': sql_project.id,
+        'name': sql_project.name,
+        'tag': sql_project.tag,
+        'advisor_id': sql_project.advisor_id,
+        'manager_id': sql_project.manager_id,
+        'director_id': sql_project.director_id
+    })
