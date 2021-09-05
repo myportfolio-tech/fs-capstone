@@ -42,7 +42,7 @@ def process_project_results(sql_projects):
 
     return jsonify({
         'success': True,
-        'employees': projects,
+        'projects': projects,
         'total': len(projects)
     })
 

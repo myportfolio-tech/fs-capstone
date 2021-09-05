@@ -1,6 +1,7 @@
 from flask import Blueprint,abort
 from staffer.models import Project
 from staffer.utils.utils import process_project_results, get_project
+from staffer.utils.auth import requires_auth
 
 projects = Blueprint('projects', __name__)
 
@@ -14,10 +15,11 @@ def get_all_projects():
     return projects
 
 
-@projects.route("/project/<int:emp_id>", methods=['GET'])
-def employee(emp_id):
+@projects.route("/project/<int:proj_id>", methods=['GET'])
+@requires_auth('get:project')
+def get_project(payload, proj_id):
     
-    proj = Project.query.get_or_404(emp_id)
+    proj = Project.query.get_or_404(proj_id)
     if proj is None:
         abort(404)
     project = get_project(proj)
