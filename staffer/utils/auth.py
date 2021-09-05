@@ -9,6 +9,9 @@ import os
 AUTH0_DOMAIN = os.environ.get('AUTH0_DOMAIN')
 ALGORITHMS = os.environ.get('ALGORITHMS')
 API_AUDIENCE = os.environ.get('AUTH0_AUDIENCE')
+AUTH0_AUDIENCE = os.environ.get('AUTH0_AUDIENCE')
+AUTH0_CLIENT_ID = os.environ.get('AUTH0_CLIENT_ID')
+AUTH0_CALLBACK_URL = os.environ.get('AUTH0_CALLBACK_URL')
 
 class AuthError(Exception):
     def __init__(self, error, status_code):
@@ -129,3 +132,9 @@ def requires_auth(permission=''):
 
         return wrapper
     return requires_auth_decorator
+
+
+def build_auth_login():
+
+    auth_path = f'https://{AUTH0_DOMAIN}/authorize?audience={AUTH0_AUDIENCE}&response_type=token&client_id={AUTH0_CLIENT_ID}&redirect_uri={AUTH0_CALLBACK_URL}'
+    return auth_path
