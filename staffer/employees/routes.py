@@ -23,3 +23,25 @@ def get_employee(payload, emp_id):
         abort(404)
 
     return json_employee(emp)
+
+
+@employees.route("/employee/create", methods=['POST'])
+@requires_auth('post:employee')
+def create_employee(payload):
+    
+    data = request.get_json()
+    username = data.get('username')
+    email = data.get('email')
+    department = data.get('department')
+
+    employee = Employee(username=username, email=email, department=department)
+    employee.insert()
+
+    emp = Employee.query.filter_by(email=email).first()
+
+    return jsonify({
+        'success': True,
+        'name': emp.username,
+        'department': emp.department,
+        'email': emp.email
+    })
