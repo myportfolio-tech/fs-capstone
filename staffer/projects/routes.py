@@ -61,7 +61,7 @@ def delete_employee(payload, emp_id):
 
 
 @projects.route("/project/<int:emp_id>/edit", methods=['PATCH'])
-@requires_auth('patch:employee')
+@requires_auth('patch:project')
 def patch_project(payload, emp_id):
 
     proj = Project.query.get_or_404(emp_id)
