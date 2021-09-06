@@ -4,7 +4,7 @@ from functools import wraps
 from jose import jwt
 from urllib.request import urlopen
 import os
-
+import requests
 
 AUTH0_DOMAIN = os.environ.get('AUTH0_DOMAIN')
 ALGORITHMS = os.environ.get('ALGORITHMS')
@@ -12,6 +12,7 @@ API_AUDIENCE = os.environ.get('AUTH0_AUDIENCE')
 AUTH0_AUDIENCE = os.environ.get('AUTH0_AUDIENCE')
 AUTH0_CLIENT_ID = os.environ.get('AUTH0_CLIENT_ID')
 AUTH0_CALLBACK_URL = os.environ.get('AUTH0_CALLBACK_URL')
+AUTH0_CLIENT_SECRET = os.environ.get('AUTH0_CLIENT_SECRET')
 
 class AuthError(Exception):
     def __init__(self, error, status_code):
@@ -160,4 +161,25 @@ def requires_auth(permission=''):
 def build_auth_login():
 
     auth_path = f'https://{AUTH0_DOMAIN}/authorize?audience={AUTH0_AUDIENCE}&response_type=token&client_id={AUTH0_CLIENT_ID}&redirect_uri={AUTH0_CALLBACK_URL}'
+    print(auth_path)
     return auth_path
+
+
+
+def auth0_get_tokens():
+
+    username1 = 'eduardo@doahfest.com'
+    password1 = 'E$condid0212139pr1m@verA$'
+
+    url = f'https://{AUTH0_DOMAIN}/oauth/token'
+    headers = {'content-type': 'application/x-www-form-urlencoded'}
+    data = {'grant_type': 'password',
+            'username': username1,
+            'password': password1,
+            'udience': AUTH0_AUDIENCE,
+            'client_id':  AUTH0_CLIENT_ID,
+            'client_secret': AUTH0_CLIENT_SECRET}
+
+    auth0_response = requests.post(url , headers=headers, data=data)
+    print(auth0_response.text)
+

@@ -3,7 +3,7 @@ from staffer.utils.auth import build_auth_login
 
 main = Blueprint('main', __name__)
 
-@main.route('/')
+@main.route('/', methods=['Get'])
 def home():
 
     return jsonify({
@@ -11,7 +11,7 @@ def home():
     })
 
 
-@main.route('/login')
+@main.route('/login', methods=['Get'])
 def login():
     
     auth0_login_path = build_auth_login()
@@ -19,15 +19,9 @@ def login():
     return redirect(auth0_login_path)  
 
 
-@main.route('/callback')
+@main.route('/callback', methods=['Get'])
 def callback():
 
-    url = request.url
-    token = request.args.get('access_token')
+    data = request.get_json()
 
-
-    return jsonify({
-        'success': True,
-        'url': url,
-        'token': token
-    })
+    return jsonify(data)
