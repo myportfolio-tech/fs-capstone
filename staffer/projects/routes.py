@@ -58,3 +58,29 @@ def delete_employee(payload, emp_id):
         'success': True,
         'emp_id': emp_id
     })
+
+
+@projects.route("/project/<int:emp_id>/edit", methods=['PATCH'])
+@requires_auth('patch:employee')
+def patch_project(payload, emp_id):
+
+    proj = Project.query.get_or_404(emp_id)
+    if proj is None:
+        abort(404)
+    
+    data = request.get_json()
+    tag = data.get('tag')
+    name = data.get('name')
+    advisor_id = data.get('advisor_id')
+    manager_id = data.get('manager_id')
+    director_id = data.get('director_id')
+
+    proj.tag = tag
+    proj.name = name
+    proj.advisor_id = advisor_id
+    proj.manager_id = manager_id
+    proj.director_id = director_id
+
+    proj.update()
+
+    return json_project(proj)

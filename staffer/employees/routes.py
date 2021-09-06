@@ -58,8 +58,8 @@ def delete_employee(payload, emp_id):
     })
 
 @employees.route("/employee/<int:emp_id>/edit", methods=['PATCH'])
-@requires_auth('delete:employee')
-def delete_employee(payload, emp_id):
+@requires_auth('patch:employee')
+def patch_employee(payload, emp_id):
 
     emp = Employee.query.get_or_404(emp_id)
     if emp is None:
@@ -76,7 +76,4 @@ def delete_employee(payload, emp_id):
 
     emp.update()
 
-    return jsonify({
-        'success': True,
-        'emp_id': emp_id
-    })
+    return json_employee(emp)
