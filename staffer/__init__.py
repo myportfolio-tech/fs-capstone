@@ -1,17 +1,20 @@
 from flask import Flask, current_app
 from flask_sqlalchemy import SQLAlchemy
 from staffer.config import Config
+from flask_migrate import Migrate
 from dotenv import load_dotenv
 
 db = SQLAlchemy()
+migrate = Migrate()
 load_dotenv()
 
 
 def create_app(config_class=Config):    
     app = Flask(__name__)
     app.config.from_object(Config)
-    #app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://psqladmin:administrator@localhost:5432/staffer_api'
+
     db.init_app(app)
+    migrate.init_app(app, db)
     
     from staffer.main.routes import main
     from staffer.employees.routes import employees

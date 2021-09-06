@@ -11,6 +11,7 @@ psycopg2 = "*"
 python-jose = "*"
 requests = "*"
 gunicorn = "*"
+flask-migrate = "*"
 
 [dev-packages]
 
