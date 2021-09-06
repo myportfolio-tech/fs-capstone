@@ -56,3 +56,27 @@ def delete_employee(payload, emp_id):
         'success': True,
         'emp_id': emp_id
     })
+
+@employees.route("/employee/<int:emp_id>/edit", methods=['PATCH'])
+@requires_auth('delete:employee')
+def delete_employee(payload, emp_id):
+
+    emp = Employee.query.get_or_404(emp_id)
+    if emp is None:
+        abort(404)
+    
+    data = request.get_json()
+    username = data.get('username')
+    email = data.get('email')
+    department = data.get('department')
+
+    emp.username = username
+    emp.email = email
+    emp.department = department
+
+    emp.update()
+
+    return jsonify({
+        'success': True,
+        'emp_id': emp_id
+    })
