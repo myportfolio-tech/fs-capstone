@@ -5,7 +5,7 @@ import string
 
 from flask_sqlalchemy import SQLAlchemy
 from staffer import db, create_app
-
+from staffer.models import Employee, Project
 
 
 def setup_test_db(app, database_path):
@@ -36,7 +36,7 @@ class StafferTest(unittest.TestCase):
             # create all tables
             self.db.create_all()
         
-        self.token1 = 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IkstNjZMQlNsNkRvWTV4NjBmdllNOCJ9.eyJpc3MiOiJodHRwczovL2RvYWgudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDYwYWQwZDg3Y2E1MDRkMDA3MGM4YWE3NCIsImF1ZCI6InN0YWZmZXIiLCJpYXQiOjE2MzA4Nzg5NTksImV4cCI6MTYzMDg4NjE1OSwiYXpwIjoiM3dFck5wdERDcFRrTTRsc3drSlU4S2llbUNmZE1la0YiLCJzY29wZSI6IiIsInBlcm1pc3Npb25zIjpbImRlbGV0ZTplbXBsb3llZSIsImRlbGV0ZTpwcm9qZWN0IiwiZ2V0OmVtcGxveWVlIiwiZ2V0OnByb2plY3QiLCJwYXRjaDplbXBsb3llZSIsInBhdGNoOnByb2plY3QiLCJwb3N0OmVtcGxveWVlIiwicG9zdDpwcm9qZWN0Il19.WzdrbdCWjeC5JKfCecLQLjzMJFA-uIu2jiaDE5B4rkrJyztpZT3FbRRPazwC4VIs-Aii8MlLSQ_VWzwocaS0n0rLBWg8LnkYwFuNDoNI0OkVBomH9xIOjlEuMANwJbmMPJgvozRfYtA7RsTw6j1ljMLgdl77Dzks8Suzh3qXFRaSst3d3u4gJXse9nciblSHlTMfaaD9SXK7F7ZSVjkMctq3h423DFQ88DyGmw-doMoSqsCEv3reliOo44JekPczbBw3gPK1RurGgx9XdiBCH_boT_kUAUaDDvDfXYAgoadg_9UhAwLUIg75fxyEU-N9TyOZqsBiFbHHclHF_YaNfw'
+        self.token1 = 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IkstNjZMQlNsNkRvWTV4NjBmdllNOCJ9.eyJpc3MiOiJodHRwczovL2RvYWgudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDYwYWQwZDg3Y2E1MDRkMDA3MGM4YWE3NCIsImF1ZCI6InN0YWZmZXIiLCJpYXQiOjE2MzA4OTA4NjUsImV4cCI6MTYzMDg5ODA2NSwiYXpwIjoiM3dFck5wdERDcFRrTTRsc3drSlU4S2llbUNmZE1la0YiLCJzY29wZSI6IiIsInBlcm1pc3Npb25zIjpbImRlbGV0ZTplbXBsb3llZSIsImRlbGV0ZTpwcm9qZWN0IiwiZ2V0OmVtcGxveWVlIiwiZ2V0OnByb2plY3QiLCJwYXRjaDplbXBsb3llZSIsInBhdGNoOnByb2plY3QiLCJwb3N0OmVtcGxveWVlIiwicG9zdDpwcm9qZWN0Il19.ClYNvFdOu5ZBi1EgsETMd16LIFIHZOFrhka-hG8Hoj2pURdfKu8n6MQQSJRfw_WPT_hHUOjWnQwZ8LNGupa80qfav14J-UqPifdGRywMZbwXY-pJnesDKZ0wmEWbrD9DpOOsEjar2RQXQjzjP62C8B_jggLMjrXJ8W1pXQ7Pd1MqhQxDPRqNVaC_MZ0Q4eUR2PxJTnFVSKxujOuv2klXE-848AxmeM9UVV9v5tCwtYIFv-t8_qLQ1k7YHg-P7VGXCmrupt8xFfR8FNVW8zziqgzoILk5VzFVCuFi4J5S4q5uvYV1-LXmEVofNw4nd2HdP6qUKpTO1m8U_yfTygFMyw'
         self.invalid_token = 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IkstNjZMQlNsNkRvWTV4NjBmdllNOCJ9.eyJpc3MiOiJodHRwczovL2RvYWgudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDYwYWQwZDg3Y2E1MDRkMDA3MGM4YWE3NCIsImF1ZCI6InN0YWZmZXIiLCJpYXQiOjE2MzA4NzEwNzYsImV4cCI6MTYzMDg3ODI3NiwiYXpwIjoiM3dFck5wdERDcFRrTTRsc3drSlU4S2llbUNmZE1la0YiLCJzY29wZSI6IiIsInBlcm1pc3Npb25zIjpbImRlbGV0ZTplbXBsb3llZSIsImRlbGV0ZTpwcm9qZWN0IiwiZ2V0OmVtcGxveWVlIiwiZ2V0OnByb2plY3QiLCJwYXRjaDplbXBsb3llZSIsInBhdGNoOnByb2plY3QiLCJwb3N0OmVtcGxveWVlIiwicG9zdDpwcm9qZWN0Il19.BsuY_cFci7IpVTZrIJS1GZr9AUYDCXYngidJ2TKIYpxhHKsYIfess1iTqHMwqIabEkmtCoVfwp71kTfZVD7Ars53jzeeiZ4KbvhKtoOS6C_aHJZSVdBc1REjdHFQ-r8F90RWzq0hW2macMexwaPTRqdygkaDgpmhXj9-u9YeU54kswaAcRjgnrfW6WiGspXu3S_oetYzAHVJDuuFd-ntMEVUsG5r4QjGMO8wRgekbfHQ0TdZrI7d-EXYMjhf4G7zohIKaz7ZdHA2eliUJWi7jENxMK5PbaDamedI9PmIFN5CeBkFjoe0diVQsVDRyN5RoFMIZj7_idRXxUEBoc1111'
 
     def tearDown(self):
@@ -134,7 +134,7 @@ class StafferTest(unittest.TestCase):
         self.assertEqual(res.status_code, 200)
 
 
-#POST Projecte with valid Token    
+#POST Project with valid Token    
     def test_create_project(self):
 
         res = self.client().post('/project/create', headers=[
@@ -150,6 +150,32 @@ class StafferTest(unittest.TestCase):
 
         self.assertEqual(res.status_code, 200)
 
+
+
+#DELETE Employee with valid Token    
+    def test_delete_employee(self):
+
+        emp = Employee.query.first()
+
+        res = self.client().delete(f'/employee/{emp.id}/delete', headers=[
+                ('Content-Type', 'application/json'),
+                ('Authorization', f'Bearer {self.token1}')
+            ])
+
+        self.assertEqual(res.status_code, 200)
+
+
+#DELETE Project with valid Token    
+    def test_delete_project(self):
+
+        proj = Project.query.first()
+
+        res = self.client().delete(f'/project/{proj.id}/delete', headers=[
+                ('Content-Type', 'application/json'),
+                ('Authorization', f'Bearer {self.token1}')
+            ])
+
+        self.assertEqual(res.status_code, 200)
 
 
 
