@@ -1,0 +1,469 @@
+{
+	"info": {
+		"_postman_id": "9888865d-e8aa-4f50-a9ee-f230bbd1ccd5",
+		"name": "Staffer",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "home",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status & Success\", function () {\r",
+							"    const responseJson = pm.response.json(); \r",
+							"    pm.response.to.have.status(200);\r",
+							"    pm.expect(responseJson.success).to.eql(true);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://staffer-udacity.herokuapp.com/",
+					"protocol": "https",
+					"host": [
+						"staffer-udacity",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "all projects",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status & Success\", function () {\r",
+							"    const responseJson = pm.response.json(); \r",
+							"    pm.response.to.have.status(200);\r",
+							"    pm.expect(responseJson.success).to.eql(true);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response Content\", () => {\r",
+							"  const responseJson = pm.response.json(); \r",
+							"  pm.expect(responseJson.total).to.greaterThan(0);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://staffer-udacity.herokuapp.com/projects",
+					"protocol": "https",
+					"host": [
+						"staffer-udacity",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"projects"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "all employees",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status & Success\", function () {\r",
+							"    const responseJson = pm.response.json(); \r",
+							"    pm.response.to.have.status(200);\r",
+							"    pm.expect(responseJson.success).to.eql(true);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response Content\", () => {\r",
+							"  const responseJson = pm.response.json(); \r",
+							"  pm.expect(responseJson.total).to.greaterThan(0);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://staffer-udacity.herokuapp.com/projects",
+					"protocol": "https",
+					"host": [
+						"staffer-udacity",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"projects"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Employee Details",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status & Success\", function () {\r",
+							"    const responseJson = pm.response.json(); \r",
+							"    pm.response.to.have.status(200);\r",
+							"    pm.expect(responseJson.success).to.eql(true);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Employee Dictionary\", () => {\r",
+							"  const employee = pm.response.json(); \r",
+							"  pm.expect(employee).to.have.all.keys('department', 'email' , 'id', 'success', 'username');\r",
+							"  pm.expect(employee['id']).to.be.a(\"number\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IkstNjZMQlNsNkRvWTV4NjBmdllNOCJ9.eyJpc3MiOiJodHRwczovL2RvYWgudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDYxMzY0YjU2N2I4ZTNhMDA2OWZlZTg5MyIsImF1ZCI6InN0YWZmZXIiLCJpYXQiOjE2MzA5NTU5NzMsImV4cCI6MTYzMDk2MzE3MywiYXpwIjoiM3dFck5wdERDcFRrTTRsc3drSlU4S2llbUNmZE1la0YiLCJzY29wZSI6IiIsInBlcm1pc3Npb25zIjpbImRlbGV0ZTplbXBsb3llZSIsImRlbGV0ZTpwcm9qZWN0IiwiZ2V0OmVtcGxveWVlIiwiZ2V0OnByb2plY3QiLCJwYXRjaDplbXBsb3llZSIsInBhdGNoOnByb2plY3QiLCJwb3N0OmVtcGxveWVlIiwicG9zdDpwcm9qZWN0Il19.l5qxfNkJrK-Ix5bLlKCkVdWwJ-PIGRwg3Vt44rUfRAMpy4XlFMGpUHpI8rxtQ_UKIUuoMS8pW0Ndvv7i4awPd4eDNe8dPtQ_sufxrbXNd-7J_78DFXWFAW3FeZuh8t3GxM4AgCIQfBOlc3eJD5SosUAzF-tyTc1psLr8RdZqX6ci8B2ujNJ6t3CmkBebPnTyBLaBumPRrtxf4QA06lx_r3YUVU9MG52ZuaZtnNoKyv9wXxseqktmfjLdkBa_Ih45hUx__OaBu4aZ9WFf4TMx6XdO08LnGU-h-o9VZB8DQ2IGtKWT85gdXzcYev9x8F3TFrD6-oPVa2TvCgk7ss5dKg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://staffer-udacity.herokuapp.com/employee/1",
+					"protocol": "https",
+					"host": [
+						"staffer-udacity",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"employee",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Project Details",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status & Success\", function () {\r",
+							"    const responseJson = pm.response.json(); \r",
+							"    pm.response.to.have.status(200);\r",
+							"    pm.expect(responseJson.success).to.eql(true);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Employee Dictionary\", () => {\r",
+							"  const project = pm.response.json(); \r",
+							"  pm.expect(project).to.have.all.keys('advisor_id', 'director_id' , 'id', 'success', 'name', 'manager_id', 'tag');\r",
+							"  pm.expect(project['id']).to.be.a(\"number\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IkstNjZMQlNsNkRvWTV4NjBmdllNOCJ9.eyJpc3MiOiJodHRwczovL2RvYWgudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDYxMzY0YjU2N2I4ZTNhMDA2OWZlZTg5MyIsImF1ZCI6InN0YWZmZXIiLCJpYXQiOjE2MzA5NTU5NzMsImV4cCI6MTYzMDk2MzE3MywiYXpwIjoiM3dFck5wdERDcFRrTTRsc3drSlU4S2llbUNmZE1la0YiLCJzY29wZSI6IiIsInBlcm1pc3Npb25zIjpbImRlbGV0ZTplbXBsb3llZSIsImRlbGV0ZTpwcm9qZWN0IiwiZ2V0OmVtcGxveWVlIiwiZ2V0OnByb2plY3QiLCJwYXRjaDplbXBsb3llZSIsInBhdGNoOnByb2plY3QiLCJwb3N0OmVtcGxveWVlIiwicG9zdDpwcm9qZWN0Il19.l5qxfNkJrK-Ix5bLlKCkVdWwJ-PIGRwg3Vt44rUfRAMpy4XlFMGpUHpI8rxtQ_UKIUuoMS8pW0Ndvv7i4awPd4eDNe8dPtQ_sufxrbXNd-7J_78DFXWFAW3FeZuh8t3GxM4AgCIQfBOlc3eJD5SosUAzF-tyTc1psLr8RdZqX6ci8B2ujNJ6t3CmkBebPnTyBLaBumPRrtxf4QA06lx_r3YUVU9MG52ZuaZtnNoKyv9wXxseqktmfjLdkBa_Ih45hUx__OaBu4aZ9WFf4TMx6XdO08LnGU-h-o9VZB8DQ2IGtKWT85gdXzcYev9x8F3TFrD6-oPVa2TvCgk7ss5dKg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://staffer-udacity.herokuapp.com/project/1",
+					"protocol": "https",
+					"host": [
+						"staffer-udacity",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"project",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Employee",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status & Success\", function () {\r",
+							"    const responseJson = pm.response.json(); \r",
+							"    pm.response.to.have.status(200);\r",
+							"    pm.expect(responseJson.success).to.eql(true);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Employee Dictionary\", () => {\r",
+							"  const project = pm.response.json(); \r",
+							"  pm.expect(project).to.have.all.keys('department', 'email' , 'id', 'success', 'username');\r",
+							"  pm.expect(project['id']).to.be.a(\"number\");\r",
+							"  pm.expect(project['username']).to.be.equal('test011');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IkstNjZMQlNsNkRvWTV4NjBmdllNOCJ9.eyJpc3MiOiJodHRwczovL2RvYWgudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDYxMzY0YjU2N2I4ZTNhMDA2OWZlZTg5MyIsImF1ZCI6InN0YWZmZXIiLCJpYXQiOjE2MzA5NjMzNzMsImV4cCI6MTYzMDk3MDU3MywiYXpwIjoiM3dFck5wdERDcFRrTTRsc3drSlU4S2llbUNmZE1la0YiLCJzY29wZSI6IiIsInBlcm1pc3Npb25zIjpbImRlbGV0ZTplbXBsb3llZSIsImRlbGV0ZTpwcm9qZWN0IiwiZ2V0OmVtcGxveWVlIiwiZ2V0OnByb2plY3QiLCJwYXRjaDplbXBsb3llZSIsInBhdGNoOnByb2plY3QiLCJwb3N0OmVtcGxveWVlIiwicG9zdDpwcm9qZWN0Il19.aKFvYiRKMPI_aFu92cNtafZCkJOJC1ddxuoomRzcabpkPTW4xICw1XFZctE-mumCv5jSDTjVSjR_2ZtZzn51EifKG2m4ujSyxzSRckMN2MByKViVPEQptthFa31NIFJtJb6jRF9N4GGe7ZM05tt7A8YgcAG8b9Gs_5x5a1lR95hzn0y-RGSZIaMtpS8m8z5-Zlm4TOuul64Z6FJQE39nUkCePXKWfuGcuMKuIaKhlb-hpqQoibx5FzEeC8ge6Jslw7XqNYvMv_9FmtcX2HlXngWkjNX3qx6Wqqw8DaIlq1p8BGHEFwltCByjctk12J5NRJbl_R8POJtRHZXqc9C55g",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"test011\",\r\n    \"email\": \"email011@email.com\",\r\n    \"department\": \"testing011\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://staffer-udacity.herokuapp.com/employee/create",
+					"protocol": "https",
+					"host": [
+						"staffer-udacity",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"employee",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Employee",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status & Success\", function () {\r",
+							"    const responseJson = pm.response.json(); \r",
+							"    pm.response.to.have.status(200);\r",
+							"    pm.expect(responseJson.success).to.eql(true);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Employee Dictionary\", () => {\r",
+							"  const project = pm.response.json(); \r",
+							"  pm.expect(project).to.have.all.keys('emp_id', 'success');\r",
+							"  pm.expect(project['emp_id']).to.be.a(\"number\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IkstNjZMQlNsNkRvWTV4NjBmdllNOCJ9.eyJpc3MiOiJodHRwczovL2RvYWgudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDYxMzY0YjU2N2I4ZTNhMDA2OWZlZTg5MyIsImF1ZCI6InN0YWZmZXIiLCJpYXQiOjE2MzA5NjMzNzMsImV4cCI6MTYzMDk3MDU3MywiYXpwIjoiM3dFck5wdERDcFRrTTRsc3drSlU4S2llbUNmZE1la0YiLCJzY29wZSI6IiIsInBlcm1pc3Npb25zIjpbImRlbGV0ZTplbXBsb3llZSIsImRlbGV0ZTpwcm9qZWN0IiwiZ2V0OmVtcGxveWVlIiwiZ2V0OnByb2plY3QiLCJwYXRjaDplbXBsb3llZSIsInBhdGNoOnByb2plY3QiLCJwb3N0OmVtcGxveWVlIiwicG9zdDpwcm9qZWN0Il19.aKFvYiRKMPI_aFu92cNtafZCkJOJC1ddxuoomRzcabpkPTW4xICw1XFZctE-mumCv5jSDTjVSjR_2ZtZzn51EifKG2m4ujSyxzSRckMN2MByKViVPEQptthFa31NIFJtJb6jRF9N4GGe7ZM05tt7A8YgcAG8b9Gs_5x5a1lR95hzn0y-RGSZIaMtpS8m8z5-Zlm4TOuul64Z6FJQE39nUkCePXKWfuGcuMKuIaKhlb-hpqQoibx5FzEeC8ge6Jslw7XqNYvMv_9FmtcX2HlXngWkjNX3qx6Wqqw8DaIlq1p8BGHEFwltCByjctk12J5NRJbl_R8POJtRHZXqc9C55g",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://staffer-udacity.herokuapp.com/employee/53/delete",
+					"protocol": "https",
+					"host": [
+						"staffer-udacity",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"employee",
+						"53",
+						"delete"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Project",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status & Success\", function () {\r",
+							"    const responseJson = pm.response.json(); \r",
+							"    pm.response.to.have.status(200);\r",
+							"    pm.expect(responseJson.success).to.eql(true);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Employee Dictionary\", () => {\r",
+							"  const project = pm.response.json(); \r",
+							"  pm.expect(project).to.have.all.keys('advisor_id', 'director_id' , 'id', 'manager_id', 'name', 'success', 'tag');\r",
+							"  pm.expect(project['id']).to.be.a(\"number\");\r",
+							"  pm.expect(project['name']).to.be.equal('Project 100');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IkstNjZMQlNsNkRvWTV4NjBmdllNOCJ9.eyJpc3MiOiJodHRwczovL2RvYWgudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDYxMzY0YjU2N2I4ZTNhMDA2OWZlZTg5MyIsImF1ZCI6InN0YWZmZXIiLCJpYXQiOjE2MzA5NjMzNzMsImV4cCI6MTYzMDk3MDU3MywiYXpwIjoiM3dFck5wdERDcFRrTTRsc3drSlU4S2llbUNmZE1la0YiLCJzY29wZSI6IiIsInBlcm1pc3Npb25zIjpbImRlbGV0ZTplbXBsb3llZSIsImRlbGV0ZTpwcm9qZWN0IiwiZ2V0OmVtcGxveWVlIiwiZ2V0OnByb2plY3QiLCJwYXRjaDplbXBsb3llZSIsInBhdGNoOnByb2plY3QiLCJwb3N0OmVtcGxveWVlIiwicG9zdDpwcm9qZWN0Il19.aKFvYiRKMPI_aFu92cNtafZCkJOJC1ddxuoomRzcabpkPTW4xICw1XFZctE-mumCv5jSDTjVSjR_2ZtZzn51EifKG2m4ujSyxzSRckMN2MByKViVPEQptthFa31NIFJtJb6jRF9N4GGe7ZM05tt7A8YgcAG8b9Gs_5x5a1lR95hzn0y-RGSZIaMtpS8m8z5-Zlm4TOuul64Z6FJQE39nUkCePXKWfuGcuMKuIaKhlb-hpqQoibx5FzEeC8ge6Jslw7XqNYvMv_9FmtcX2HlXngWkjNX3qx6Wqqw8DaIlq1p8BGHEFwltCByjctk12J5NRJbl_R8POJtRHZXqc9C55g",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"tag\": 100,\r\n    \"name\": \"Project 100\",\r\n    \"advisor_id\": 1,\r\n    \"manager_id\": 2,\r\n    \"director_id\": 3\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://staffer-udacity.herokuapp.com/project/create",
+					"protocol": "https",
+					"host": [
+						"staffer-udacity",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"project",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Project",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status & Success\", function () {\r",
+							"    const responseJson = pm.response.json(); \r",
+							"    pm.response.to.have.status(200);\r",
+							"    pm.expect(responseJson.success).to.eql(true);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Project Dictionary\", () => {\r",
+							"  const project = pm.response.json(); \r",
+							"  pm.expect(project).to.have.all.keys('emp_id', 'success');\r",
+							"  pm.expect(project['emp_id']).to.be.a(\"number\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IkstNjZMQlNsNkRvWTV4NjBmdllNOCJ9.eyJpc3MiOiJodHRwczovL2RvYWgudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDYxMzY0YjU2N2I4ZTNhMDA2OWZlZTg5MyIsImF1ZCI6InN0YWZmZXIiLCJpYXQiOjE2MzA5NjMzNzMsImV4cCI6MTYzMDk3MDU3MywiYXpwIjoiM3dFck5wdERDcFRrTTRsc3drSlU4S2llbUNmZE1la0YiLCJzY29wZSI6IiIsInBlcm1pc3Npb25zIjpbImRlbGV0ZTplbXBsb3llZSIsImRlbGV0ZTpwcm9qZWN0IiwiZ2V0OmVtcGxveWVlIiwiZ2V0OnByb2plY3QiLCJwYXRjaDplbXBsb3llZSIsInBhdGNoOnByb2plY3QiLCJwb3N0OmVtcGxveWVlIiwicG9zdDpwcm9qZWN0Il19.aKFvYiRKMPI_aFu92cNtafZCkJOJC1ddxuoomRzcabpkPTW4xICw1XFZctE-mumCv5jSDTjVSjR_2ZtZzn51EifKG2m4ujSyxzSRckMN2MByKViVPEQptthFa31NIFJtJb6jRF9N4GGe7ZM05tt7A8YgcAG8b9Gs_5x5a1lR95hzn0y-RGSZIaMtpS8m8z5-Zlm4TOuul64Z6FJQE39nUkCePXKWfuGcuMKuIaKhlb-hpqQoibx5FzEeC8ge6Jslw7XqNYvMv_9FmtcX2HlXngWkjNX3qx6Wqqw8DaIlq1p8BGHEFwltCByjctk12J5NRJbl_R8POJtRHZXqc9C55g",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://staffer-udacity.herokuapp.com/project/17/delete",
+					"protocol": "https",
+					"host": [
+						"staffer-udacity",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"project",
+						"17",
+						"delete"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
