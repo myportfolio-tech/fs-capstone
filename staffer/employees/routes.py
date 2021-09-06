@@ -39,9 +39,20 @@ def create_employee(payload):
 
     emp = Employee.query.filter_by(email=email).first()
 
+    return json_employee(emp)
+
+
+@employees.route("/employee/<int:emp_id>/delete", methods=['DELETE'])
+@requires_auth('delete:employee')
+def delete_employee(payload, emp_id):
+
+    emp = Employee.query.get_or_404(emp_id)
+    if emp is None:
+        abort(404)
+    
+    emp.delete()
+
     return jsonify({
         'success': True,
-        'name': emp.username,
-        'department': emp.department,
-        'email': emp.email
+        'emp_id': emp_id
     })

@@ -24,6 +24,7 @@ def get_project(payload, proj_id):
 
     return json_project(proj)
 
+
 @projects.route("/project/create", methods=['POST'])
 @requires_auth('post:project')
 def create_project(payload):
@@ -40,11 +41,20 @@ def create_project(payload):
 
     proj = Project.query.filter_by(tag=tag).first()
 
+    return json_project(proj)
+
+
+@projects.route("/project/<int:emp_id>/delete", methods=['DELETE'])
+@requires_auth('delete:project')
+def delete_employee(payload, emp_id):
+
+    emp = Project.query.get_or_404(emp_id)
+    if emp is None:
+        abort(404)
+    
+    emp.delete()
+
     return jsonify({
         'success': True,
-        'name': proj.name,
-        'tag': proj.tag,
-        'advisor_id': proj.advisor_id,
-        'manager_id': proj.manager_id,
-        'director_id': proj.director_id
+        'emp_id': emp_id
     })
