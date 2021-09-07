@@ -107,7 +107,7 @@ The main module **staffer** contains the modules:
 4. projects
 5. utils
 
-These modules are registered as Blueprints in the main module __init__ file
+These modules are registered as Blueprints in the staffer module __init__ file
 
 
 &nbsp;
