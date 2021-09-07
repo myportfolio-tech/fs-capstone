@@ -68,9 +68,66 @@ Check the app is running [`locally`](http://localhost:5000).
 
 &nbsp;
 
+### Project Structure
+
+```sh
+fs-capstone
+    ├───migrations
+    │   └───versions
+    └───staffer
+    │   ├───employees
+    │   ├─────── _init__.py        
+    │   ├───errors
+    │   ├─────── _init__.py      
+    │   ├───main
+    │   ├─────── _init__.py      
+    │   ├───projects
+    │   ├─────── _init__.py      
+    │   ├───utils
+    │   ├─────── _init__.py      
+    │   │
+    │   ├ __init__.py
+    │   ├ config.py
+    │   ├ models.py
+    │
+    ├ .env
+    ├ manage.py
+    ├ test_staffer.py
+    ├ wsgi.py
+
+```
+
+&nbsp;
+
+The main module **staffer** contains the modules:
+
+1. employees
+2. errors
+3. main
+4. projects
+5. utils
+
+These modules are registered as Blueprints in the main module __init__ file
+
+
+&nbsp;
+
 ### Migrations
 
 
+Because flask_migrate is no longer mantained, this project uses *flask.cli*
 
-## Heroku
+If you are migrating to Heroku, you must perform the taasks in the specific order:
+
+Run Locally:
+```concole
+flask db init
+flask db migrate 
+```
+Commit your changes to github.
+
+Run locally and in Heroku:
+```console
+flask db upgrade
+```
 

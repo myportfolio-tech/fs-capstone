@@ -4,8 +4,8 @@ The Staffer API grants uses RBAC to delegate the following roles and their permi
 ## Roles
 
 ----
-&nbsp;
-#### **HR Manager**
+
+#### &nbsp;&nbsp;  **HR Manager**
 This role allows read, create, edit, and delete employee and project records.
 ### Permissions
 * delete:employee	
@@ -20,7 +20,7 @@ This role allows read, create, edit, and delete employee and project records.
 ##### User: email1@email.com
 &nbsp;
 
-#### **Project Manager**
+#### &nbsp;&nbsp;  **Project Manager**
 This role allows read, create and edit project records (no delete permission).
 No access to employee record
 ### Permissions
