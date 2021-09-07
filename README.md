@@ -5,7 +5,7 @@ The staffer API provides backend services for an employees & projects applicatio
 
 The API is live on heroku at [`Staffer App`](https://staffer-udacity.herokuapp.com/)
 
-We are implementing a Jinja template front end (not part of this project) located at  [`Jinja Frontend`](http://udacity-staffer.herokuapp.com/)
+We are implementing a Jinja templated front end (not part of this project) located at  [`Jinja Frontend`](http://udacity-staffer.herokuapp.com/)
 
 The [`Staffer App`](https://staffer-udacity.herokuapp.com/)
 
@@ -20,11 +20,13 @@ The [`Staffer App`](https://staffer-udacity.herokuapp.com/)
 
 ## Setting up the Project
 
-The project runsFlask on a [Pipenv](https://docs.pipenv.org/) virtual environment.
+The project runs a Flask server on a [Pipenv](https://docs.pipenv.org/) virtual environment.
 
-We use a postgresql database
+A postgresql database and SqlAlchemy handle the data.
 
-### Before you start
+&nbsp;
+
+### Before you start:
 1. Install [postgresql](https://www.postgresql.org/download/) if needed
 2. Install pipenv 
 
@@ -41,11 +43,17 @@ pipenv shell
 ```console
 pipenv install
 ```
+
+&nbsp;
+
+
 ### Database Setup
-With Postgres running, create the database, add tables, and insert innitial data.
+With Postgres running, create the database, create tables, and insert innitial data.
 ```bash
 psql postgres < starting_psql_tester.psql
 ```
+&nbsp;
+
 
 ### Running the flask server
 
@@ -57,3 +65,12 @@ python wsgi.py
 ```
 
 Check the app is running [`locally`](http://localhost:5000).
+
+&nbsp;
+
+### Migrations
+
+
+
+## Heroku
+
