@@ -1,5 +1,5 @@
-# Users - RBAC - Testin
-The Staffer API grants uses RBAC to deletegate the following roles and their permissions:
+# Users - RBAC - Testing
+The Staffer API grants uses RBAC to delegate the following roles and their permissions:
 
 ## Roles
 
@@ -33,3 +33,18 @@ No access to employee record
 &nbsp;
 
 ----
+
+# Testing
+Because some of the test depend on specific employee and project ids, make sure you have a new new data set before running the test file.  
+Create the test tables and add the test data. 
+
+```bash
+psql postgres < starting_psql_tester.psql
+```
+Once the database is running, run the test file
+
+```
+python test_staffer.py
+```
+
+Ensure all tests run successfully.

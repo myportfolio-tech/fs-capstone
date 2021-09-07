@@ -7,6 +7,8 @@ import os
 from flask_sqlalchemy import SQLAlchemy
 from staffer import db, create_app
 from staffer.models import Employee, Project
+from sqlalchemy import text
+
 
 
 def setup_test_db(app, database_path):
@@ -20,6 +22,8 @@ def setup_test_db(app, database_path):
 class StafferTest(unittest.TestCase):
 
     def setUp(self):
+
+
 
         self.app = create_app()
         self.app.testing = True
@@ -81,7 +85,7 @@ class StafferTest(unittest.TestCase):
 #Get Employee with Valid Token    
     def test_get_employee(self):
 
-        res = self.client().get('/employee/1', headers=[
+        res = self.client().get('/employee/50', headers=[
                 ('Content-Type', 'application/json'),
                 ('Authorization', f'Bearer {self.token1}')
             ])
@@ -94,9 +98,9 @@ class StafferTest(unittest.TestCase):
 
 
 #Get Project with Valid Token    
-    def test_get_employee(self):
+    def test_get_project(self):
 
-        res = self.client().get('/project/1', headers=[
+        res = self.client().get('/project/10', headers=[
                 ('Content-Type', 'application/json'),
                 ('Authorization', f'Bearer {self.token1}')
             ])
@@ -109,14 +113,14 @@ class StafferTest(unittest.TestCase):
 
 
 #Get Employee with Invalid Token    
-    def test_get_employee(self):
+    def test_get_employee_invalid(self):
 
-        res = self.client().get('/employee/1', headers=[
+        res = self.client().get('/employee/30', headers=[
                 ('Content-Type', 'application/json'),
-                ('Authorization', f'Bearer {self.invalid_token}')
+                ('Authorization', f'Bearer {self.token2}')
             ])
 
-        self.assertEqual(res.status_code, 400)
+        self.assertEqual(res.status_code, 403)
 
 
 #POST Employee with valid Token    
@@ -134,6 +138,23 @@ class StafferTest(unittest.TestCase):
                 "department": "testing"}))
 
         self.assertEqual(res.status_code, 200)
+
+
+#POST Employee with invalid Token    
+    def test_create_employee_invalid(self):
+        
+        username = ''.join(random.choice(string.ascii_lowercase) for i in range(10))
+        email = (''.join(random.choice(string.ascii_letters) for i in range(10))) + 'email.com'
+        
+        res = self.client().post('/employee/create', headers=[
+                ('Content-Type', 'application/json'),
+                ('Authorization', f'Bearer {self.token2}')
+            ], data = json.dumps({
+                "username": username,
+                "email": email,
+                "department": "testing"}))
+
+        self.assertEqual(res.status_code, 403)
 
 
 #POST Project with valid Token    
@@ -167,6 +188,19 @@ class StafferTest(unittest.TestCase):
         self.assertEqual(res.status_code, 200)
 
 
+#DELETE Employee with invalid Token    
+    def test_delete_employee_invalid(self):
+
+        emp = Employee.query.first()
+
+        res = self.client().delete(f'/employee/{emp.id}/delete', headers=[
+                ('Content-Type', 'application/json'),
+                ('Authorization', f'Bearer {self.token2}')
+            ])
+
+        self.assertEqual(res.status_code, 403)
+
+
 #DELETE Project with valid Token    
     def test_delete_project(self):
 
@@ -178,6 +212,20 @@ class StafferTest(unittest.TestCase):
             ])
 
         self.assertEqual(res.status_code, 200)
+
+
+
+#DELETE Project with invalid Token    
+    def test_delete_project_invalid(self):
+
+        proj = Project.query.first()
+
+        res = self.client().delete(f'/project/{proj.id}/delete', headers=[
+                ('Content-Type', 'application/json'),
+                ('Authorization', f'Bearer {self.token2}')
+            ])
+
+        self.assertEqual(res.status_code, 403)
 
 
 
